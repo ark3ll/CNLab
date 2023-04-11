@@ -10,7 +10,7 @@ s = socket.socket()
 
 print(f"[*] Connecting to {server_ip}:{server_port}...")
 
-s.connect((server_ip, server_port))
+s.connect((server_ip, int(server_port)))
 print("[+] Connected.")
 
 name = input("Enter your name: ")
