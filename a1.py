@@ -1,7 +1,6 @@
 import socket
 import threading
 
-username = input("Choose a username: ")
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #defines and connects to port
