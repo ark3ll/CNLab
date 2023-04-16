@@ -5,8 +5,8 @@ username = input("Choose a username: ")
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 #defines and connects to port
-server_port = ("143.47.184.219", 5378)
-client.connect(server_port)
+host_port = ("143.47.184.219", 5378)
+client.connect(host_port)
 
 def receive():
     while True:
