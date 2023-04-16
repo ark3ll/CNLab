@@ -9,7 +9,7 @@ client.connect(host_port)
 
 while True:
     name = input("Enter Username: ")
-    string_bytes = ("HELLO-FORM" + name + "\n").encode("utf-8")
+    string_bytes = ("HELLO-FROM" + name + "\n").encode("utf-8")
     bytes_len = len(string_bytes)
     num_bytes = bytes_len
     while num_bytes > 0:
