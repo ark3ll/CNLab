@@ -16,6 +16,8 @@ while True:
         num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
 
     data = client.recv(4096).decode()
+    
+
     print(data)
 
     if data == "IN-USE\n":
@@ -43,31 +45,31 @@ t = threading.Thread(daemon=True, target=other, args=(client,))
 t.start()
 
 while True:
-    message = input("")
+    msg = input("")
 
     try:
-        if message == "!who":
+        if msg == "!who":
             string_bytes = ("LIST\n").encode("utf-8")
             bytes_length = len(string_bytes)
             num_bytes = bytes_length
             while num_bytes > 0:
                 num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
 
-        elif message.startswith("@"):
-            to_user, msg = message.split(maxsplit=1)
-            string_bytes = ("SEND " + to_user[1:] + " " + msg + "\n").encode("utf-8")
+        elif msg.startswith("@"):
+            recipient, msg = msg.split(maxsplit=1)
+            string_bytes = ("SEND " + recipient[1:] + " " + msg + "\n").encode("utf-8")
             bytes_length = len(string_bytes)
             num_bytes = bytes_length
             while num_bytes > 0:
                 num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
 
-        elif message == "!quit":
+        elif msg == "!quit":
             client.close()
-            print("Client is closed")
+            print("The chat room has been closed")
             break
 
         else:
-            print("Invalid command")
+            print("Given command is invalid")
 
     except KeyboardInterrupt:
         client.close()
