@@ -3,7 +3,6 @@ import threading
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-# defines and connects to port
 host_port = ("143.47.184.219", 5378)
 client.connect(host_port)
 
@@ -15,21 +14,7 @@ while True:
     while num_bytes > 0:
         num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
         data = client.recv(1).decode()
-        print(data)
-
-
-
-    # data = client.recv(0).decode()
-    # while True:
-    #     chunk = client.recv(1).decode()
-    #     if not chunk:
-    #         break
-    #     data += chunk
-    
-    # data = client.recv(4096).decode()
-    
-
-    # print(data)
+        print(data, end="")
 
     if data == "IN-USE\n":
         client.close()
@@ -46,8 +31,7 @@ while True:
 def other(client):
     while True:
         try:
-            print(client.recv(4096).decode())
-
+            print(client.recv(1).decode(), end="")
         except OSError as msg:
             print(msg)
 
@@ -59,14 +43,7 @@ while True:
     msg = input("")
 
     try:
-        if msg == "!who":
-            string_bytes = ("LIST\n").encode("utf-8")
-            bytes_length = len(string_bytes)
-            num_bytes = bytes_length
-            while num_bytes > 0:
-                num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
-
-        elif msg.startswith("@"):
+        if msg.startswith("@"):
             recipient, msg = msg.split(maxsplit=1)
             string_bytes = ("SEND " + recipient[1:] + " " + msg + "\n").encode("utf-8")
             bytes_length = len(string_bytes)
@@ -74,6 +51,14 @@ while True:
             while num_bytes > 0:
                 num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
 
+        elif msg == "!who":
+            string_bytes = ("LIST\n").encode("utf-8")
+            bytes_length = len(string_bytes)
+            num_bytes = bytes_length
+            while num_bytes > 0:
+                num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
+            
+            
         elif msg == "!quit":
             client.close()
             print("The chat room has been closed")
