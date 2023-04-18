@@ -8,7 +8,7 @@ host_port = ("143.47.184.219", 5378)
 client.connect(host_port)
 
 while True:
-    name = input("Enter Username: ")
+    name = input("Please select a username: ")
     string_bytes = ("HELLO-FROM " + name + "\n").encode("utf-8")
     bytes_length = len(string_bytes)
     num_bytes = bytes_length
