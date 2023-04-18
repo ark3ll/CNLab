@@ -14,6 +14,8 @@ while True:
     num_bytes = bytes_length
     while num_bytes > 0:
         num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
+        data = client.recv(1).decode()
+        print(data)
 
 
 
@@ -24,10 +26,10 @@ while True:
     #         break
     #     data += chunk
     
-    data = client.recv(4096).decode()
+    # data = client.recv(4096).decode()
     
 
-    print(data)
+    # print(data)
 
     if data == "IN-USE\n":
         client.close()
