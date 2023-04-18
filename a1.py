@@ -10,10 +10,10 @@ client.connect(host_port)
 while True:
     name = input("Enter Username: ")
     string_bytes = ("HELLO-FROM " + name + "\n").encode("utf-8")
-    bytes_len = len(string_bytes)
-    num_bytes = bytes_len
+    bytes_length = len(string_bytes)
+    num_bytes = bytes_length
     while num_bytes > 0:
-        num_bytes -= client.send(string_bytes[bytes_len-num_bytes:]) 
+        num_bytes -= client.send(string_bytes[bytes_length-num_bytes:]) 
 
     data = client.recv(4096).decode()
     print(data)
@@ -49,18 +49,18 @@ while True:
     try:
         if msg == "!who":
             string_bytes  = ("LIST\n").encode("utf-8")
-            bytes_len = len(string_bytes)
-            num_bytes = bytes_len
+            bytes_length = len(string_bytes)
+            num_bytes = bytes_length
             while num_bytes > 0:
-                num_bytes -= client.send(string_bytes[bytes_len - num_bytes:])
+                num_bytes -= client.send(string_bytes[bytes_length - num_bytes:])
 
         elif msg.startswith("@"):
             to_user, msg = msg.split(maxsplit=1)
             string_bytes = ("SEND " + to_user[1:] + " " + msg + "\n").encode("utf-8")
-            bytes_len = len(string_bytes)
-            num_bytes = bytes_len
+            bytes_length = len(string_bytes)
+            num_bytes = bytes_length
             while num_bytes > 0:
-                num_bytes -= client.send(string_bytes[bytes_len - num_bytes:])
+                num_bytes -= client.send(string_bytes[bytes_length - num_bytes:])
         
         elif msg == "!quit":
             client.close()
