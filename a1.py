@@ -25,7 +25,7 @@ while True:
         client.connect(host_port)
 
     elif data == "BUSY/n":
-        print("Maximum number of clients has been reached, Try again later")
+        print("The chat room has reach maximum occupancy, please try again later")
         client.close
     else:
         break
