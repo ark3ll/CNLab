@@ -15,6 +15,15 @@ while True:
     while num_bytes > 0:
         num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
 
+
+
+    # data = client.recv(0).decode()
+    # while True:
+    #     chunk = client.recv(1).decode()
+    #     if not chunk:
+    #         break
+    #     data += chunk
+    
     data = client.recv(4096).decode()
     print(data)
 
