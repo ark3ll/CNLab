@@ -13,25 +13,17 @@ while True:
     num_bytes = bytes_length
     while num_bytes > 0:
         num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
+        data = client.recv(1).decode()
+        print(data, end="")
 
-    response = ''
-    while True:
-        data = client.recv(1)
-        data = data.decode()
-        if data == '\n':
-            break
-        response += data
-
-    print(response)
-
-    if response == "IN-USE":
+    if data == "IN-USE\n":
         client.close()
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client.connect(host_port)
 
-    elif response == "BUSY":
+    elif data == "BUSY/n":
         print("Maximum number of clients has been reached, Try again later")
-        client.close()
+        client.close
     else:
         break
 
@@ -39,14 +31,9 @@ while True:
 def other(client):
     while True:
         try:
-            data = client.recv(1).decode()
-            if not data:
-                continue
-            print(data, end="")
+            print(client.recv(1).decode(), end="")
         except OSError as msg:
-            # TODO: Fix this error
-            # print(msg)
-            break
+            print(msg)
 
 
 t = threading.Thread(daemon=True, target=other, args=(client,))
@@ -73,7 +60,6 @@ while True:
             
             
         elif msg == "!quit":
-            kill_listener = True
             client.close()
             print("The chat room has been closed")
             break
