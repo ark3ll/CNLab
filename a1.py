@@ -22,9 +22,8 @@ while True:
             break
         response += data
 
-    print(response)
-
     if response == "IN-USE":
+        print("This name is in use")
         client.close()
         client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         client.connect(host_port)
@@ -33,6 +32,7 @@ while True:
         print("Maximum number of clients has been reached, Try again later")
         client.close()
     else:
+        print(response)
         break
 
 
