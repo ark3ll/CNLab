@@ -44,8 +44,6 @@ def other(client):
                 continue
             print(data, end="")
         except OSError as msg:
-            # TODO: Fix this error
-            # print(msg)
             break
 
 
