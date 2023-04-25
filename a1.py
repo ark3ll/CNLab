@@ -32,30 +32,35 @@ while True:
         print("Maximum number of clients has been reached, Try again later")
         client.close()
 
-    elif response == "BAD-DEST-USER":
-        print("User not recognised, try again.")
-
-    elif response == "BAD-RQST-HDR":
-        print("An error occurred, please try again.")
-
-    elif response == "BAD-RQST-BODY":
-        print("An error occurred, please try again.")
-
     else:
         print(response)
         break
 
 
+
 def other(client):
     while True:
-        try:
-            data = client.recv(1).decode()
-            if not data:
-                continue
-            print(data, end="")
-        except OSError as msg:
-            break
+        message = ""
+        while True:
+            try:
+                data = client.recv(1).decode()
+                if data == "\n":
+                    break
+                message += data
+            except OSError as msg:
+                break
+        if message == "BAD-DEST-USER":
+            print("User not recognised, try again.")
 
+        elif message == "BAD-RQST-HDR":
+            print("An error occurred, please try again.")
+
+        elif message == "BAD-RQST-BODY":
+            print("An error occurred, please try again.")
+        else:
+            print(f"'{message}'")
+
+            
 
 t = threading.Thread(daemon=True, target=other, args=(client,))
 t.start()
