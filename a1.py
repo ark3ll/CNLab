@@ -37,7 +37,6 @@ while True:
         break
 
 
-
 def other(client):
     while True:
         message = ""
@@ -57,10 +56,14 @@ def other(client):
 
         elif message == "BAD-RQST-BODY":
             print("An error occurred, please try again.")
+        elif message == "SEND-OK":
+            continue
+        elif message.startswith("DELIVERY"):
+            message = message.replace("DELIVERY", "\b")
+            print(message)
         else:
-            print(f"'{message}'")
+            print(message)
 
-            
 
 t = threading.Thread(daemon=True, target=other, args=(client,))
 t.start()
