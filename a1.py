@@ -14,11 +14,11 @@ while True:
     while num_bytes > 0:
         num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
 
-    response = ''
+    response = ""
     while True:
         data = client.recv(1)
         data = data.decode()
-        if data == '\n':
+        if data == "\n":
             break
         response += data
 
@@ -31,6 +31,16 @@ while True:
     elif response == "BUSY":
         print("Maximum number of clients has been reached, Try again later")
         client.close()
+
+    elif response == "BAD-DEST-USER":
+        print("User not recognised, try again.")
+
+    elif response == "BAD-RQST-HDR":
+        print("An error occurred, please try again.")
+
+    elif response == "BAD-RQST-BODY":
+        print("An error occurred, please try again.")
+
     else:
         print(response)
         break
@@ -68,8 +78,7 @@ while True:
             num_bytes = bytes_length
             while num_bytes > 0:
                 num_bytes -= client.send(string_bytes[bytes_length - num_bytes :])
-            
-            
+
         elif msg == "!quit":
             kill_listener = True
             client.close()
