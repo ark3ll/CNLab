@@ -7,7 +7,7 @@ address = (host, port)
 format = "utf-8"
 quit = "!quit"
 
-server = socket.socket(socket.AF_INET, socket.SOCKET_STREAM)
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(address)
 
 clients =set()
