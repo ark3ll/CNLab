@@ -3,7 +3,7 @@ import threading
 
 port = 6969
 host = "localhost"
-address = (server, port)
+address = (host, port)
 format = "utf-8"
 quit = "!quit"
 
