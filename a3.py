@@ -13,7 +13,7 @@ server.bind(address)
 clients =set()
 clients_lock = threading.Lock()
 
-def handle_client(conn,address)
+def handle_client(conn,address):
     print(f"[NEW CONNECTION] {addr} Connected")
 
     try:
