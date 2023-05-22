@@ -57,6 +57,7 @@ def other(client):
         elif message == "BAD-RQST-BODY":
             print("An error occurred, please try again.")
         elif message == "SEND-OK":
+            print("Message sent.")
             continue
         elif message.startswith("DELIVERY"):
             message = message.replace("DELIVERY", "\b")
