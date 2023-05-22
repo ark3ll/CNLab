@@ -3,7 +3,7 @@ import threading
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-host_port = ("143.47.184.219", 5378)
+host_port = ("143.47.184.219", 6969)
 client.connect(host_port)
 
 while True:
