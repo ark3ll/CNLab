@@ -44,7 +44,7 @@ def start():
         conn, address = server.accept()
         with clients_lock:
             client.add(conn)
-        thread = threading.Thread(target=, args=(conn, address))
+        thread = threading.Thread(target=handle_client, args=(conn, address))
         thread.start()
 
 start
